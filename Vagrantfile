@@ -25,7 +25,7 @@ Vagrant.configure("2") do |config|
                   "--natdnshostresolver1", "on"]
   end
 
-  config.vm.provision :shell, :inline => "echo \"America/New_York\" | sudo tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata"
+  config.vm.provision :shell, :path => "before-install.sh"
 
   config.vbguest.auto_update = false
 
@@ -33,6 +33,9 @@ Vagrant.configure("2") do |config|
     puppet.manifests_path = "manifests"
     puppet.module_path = "modules"
     puppet.manifest_file = "base.pp"
-    puppet.options = "--verbose --trace"
+    puppet.options = "--verbose --trace --debug"
   end
+
+  config.vm.provision :shell, :path => "post-install.sh"
+
 end

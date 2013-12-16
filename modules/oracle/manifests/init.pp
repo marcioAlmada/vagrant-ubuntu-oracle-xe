@@ -142,3 +142,12 @@ class oracle::xe {
   	  require => [Package["oracle-xe"], Exec["configure xe"]],
   }
 }
+
+class oracle::sql {
+  
+  file {
+    "/home/vagrant/db.sql":
+      source => "puppet:///modules/oracle/db.sql";
+  }
+
+}
